@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pendaftaran Member - Sahabat Kita</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+            transition: background-color 0.5s;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            background-color: #a1376c;
+            color: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #007bff;
+        }
+        .website-name {
+            margin-left: 10px;
+            color: #333;
+        }
+        .time-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        .time-btn {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background: #007bff;
+            color: white;
+            transition: background 0.3s;
+        }
+        .time-btn:hover {
+            background: #0056b3;
+        }
+        .time-btn.active {
+            background: #28a745;
+        }
+        #current-time {
+            text-align: center;
+            margin: 10px 0;
+            font-size: 18px;
+            color: #333;
+        }
+        form {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .radio-group {
+            display: flex;
+            gap: 20px;
+            margin: 10px 0;
+        }
+        .radio-group input[type="radio"] {
+            width: auto;
+        }
+        .radio-group label {
+            margin: 0;
+            font-weight: normal;
+        }
+        #bank-select, #ewallet-select {
+            display: none;
+        }
+        button[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        button[type="submit"]:hover {
+            background: #218838;
+        }
+        .theme-pagi { background: linear-gradient(to bottom, #87CEEB, #f4f4f4); }
+        .theme-siang { background: linear-gradient(to bottom, #FFD700, #f4f4f4); }
+        .theme-malam { background: linear-gradient(to bottom, #4B0082, #f4f4f4); }
+        .error { color: red; font-size: 12px; }
+    </style>
+</head>
+<body class="theme-pagi">
+    <header>
+    <div id="current-time"></div>
+        <div class="time-buttons">
+            <button class="time-btn active" onclick="setTheme('auto')">COLOR RUM</button>
+        </div>
+        
+    </header>
+    
+    <div class="header">
+              <div class="logo-section">
+            <img src="logo.png" style="width: 50px;">
+        </div>
+        <h1>ꜱ͜͡ᴋ ᭼ SAHABAT KITA</h1>
+        <p>FORMAT PENDAFTARAN GAJI MEMBER</p>
+    </div>
+    <form id="registration-form">
+        <label for="nama-faya">NAMA FAYA : </label>
+        <input type="text" id="nama-faya" required>
+
+        <label for="id-faya">ID FAYA : </label>
+        <input type="number" id="id-faya" required>
+
+        <label for="nomor-hp">NOMOR HP / WA : </label>
+        <input type="tel" id="nomor-hp" pattern="[0-9]{10,13}" title="Masukkan nomor HP minimal 10 digit" required>
+
+        <div class="radio-group">
+            <label><input type="radio" name="payment-type" value="bank" onclick="togglePayment('bank')"> BANK</label>
+            <label><input type="radio" name="payment-type" value="ewallet" onclick="togglePayment('ewallet')"> EWALLET</label>
+        </div>
+
+        <div id="bank-select">
+            <label for="bank-name">NAMA BANK :</label>
+            <select id="bank-name">
+                <option value="">PILIH BANK</option>
+                <option value="BANK BCA">BANK BCA / Admin Rp 2.000</option>
+                <option value="BANK BNI">BANK BNI / Admin Rp 2.000</option>
+                <option value="BANK MANDIRI">BANK MANDIRI / Admin Rp 2.000</option>
+                <option value="BANK BRI">BANK BRI/ Admin Rp 2.000</option>
+                <option value="BANK CIMB">BANK CIMB / Admin Rp 2.000</option>
+                <option value="BANK DANAMON">BANK DANAMON / Admin Rp 2.000</option>
+                <option value="BANK PERMATA">BANK PERMATA / Admin Rp 2.000</option>
+                <option value="BANK SEABANK">BANK SEABANK / Admin 1.000</option>
+                <option value="BANK ALADIN">BANK ALADIN / Admin Rp 2.000</option>
+            </select>
+        </div>
+
+        <div id="ewallet-select">
+            <label for="ewallet-name">NAMA E-WALLET : </label>
+            <select id="ewallet-name">
+                <option value="">PILIH E-WALLET</option>
+                <option value="OVO">OVO / Admin Rp 1 500</option>
+                <option value="DANA">DANA</option>
+                <option value="GOPAY">GOPAY / Admin Rp 2.000</option>
+                <option value="SHOPEEPAY">SHOPEEPAY / Admin Rp 1 500</option>
+                <option value="LINK AJA">LINK AJA / Admin Rp 2.000</option>
+                <option value="SAKUKU">Sakuku / Admin Rp 2 000</option>
+            </select>
+        </div>
+
+        <label for="nomor-rekening">Nomor Bank/E-Wallet:</label>
+        <input type="number" id="nomor-rekening" placeholder="Masukkan nomor rekening atau nomor e-wallet">
+
+        <label for="nama-pemilik">Nama Pemilik Bank/E-Wallet:</label>
+        <input type="text" id="nama-pemilik" required>
+
+        <button type="submit">Daftar Member</button>
+        <div id="error-message" class="error" style="display: none;"></div>
+    </form>
+
+    <script>
+        // Update waktu real-time
+        function updateTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('id-ID');
+            document.getElementById('current-time').innerHTML = `Waktu Saat Ini: ${timeString}`;
+        }
+        setInterval(updateTime, 1000);
+        updateTime(); // Initial call
+
+        // Set tema berdasarkan waktu atau manual
+        function setTheme(mode) {
+            const buttons = document.querySelectorAll('.time-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active'); // Aktifkan button yang diklik
+
+            let themeClass;
+            if (mode === 'auto') {
+                const hour = new Date().getHours();
+                if (hour >= 5 && hour < 12) themeClass = 'theme-pagi';
+                else if (hour >= 12 && hour < 18) themeClass = 'theme-siang';
+                else themeClass = 'theme-malam';
+            } else {
+                themeClass = `theme-${mode}`;
+            }
+            document.body.className = themeClass;
+        }
+
+        // Toggle dropdown bank/ewallet
+        function togglePayment(type) {
+            const bankSelect = document.getElementById('bank-select');
+            const ewalletSelect = document.getElementById('ewallet-select');
+            if (type === 'bank') {
+                bankSelect.style.display = 'block';
+                ewalletSelect.style.display = 'none';
+                document.getElementById('nomor-rekening').placeholder = 'Masukkan nomor rekening bank';
+            } else {
+                bankSelect.style.display = 'none';
+                ewalletSelect.style.display = 'block';
+                document.getElementById('nomor-rekening').placeholder = 'Masukkan nomor e-wallet';
+            }
+        }
+
+        // Submit form ke Telegram
+        document.getElementById('registration-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const errorDiv = document.getElementById('error-message');
+            errorDiv.style.display = 'none';
+
+            // Validasi
+            const formData = {
+                namaFaya: document.getElementById('nama-faya').value.trim(),
+                idFaya: document.getElementById('id-faya').value,
+                nomorHp: document.getElementById('nomor-hp').value,
+                paymentType: document.querySelector('input[name="payment-type"]:checked')?.value || '',
+                paymentName: document.getElementById('bank-name').value || document.getElementById('ewallet-name').value || '',
+                nomorRekening: document.getElementById('nomor-rekening').value.trim(),
+                namaPemilik: document.getElementById('nama-pemilik').value.trim()
+            };
+
+            if (!formData.namaFaya || !formData.idFaya || !formData.nomorHp || !formData.paymentType || !formData.nomorRekening || !formData.namaPemilik) {
+                errorDiv.textContent = 'Semua field wajib diisi!';
+                errorDiv.style.display = 'block';
+                return;
+            }
+
+            // Format pesan Telegram
+            const message = `*🫂 WELCOME TO AGENCY SAHABAT KITA*\n\n` +
+                `💠 NAMA FAYA : ${formData.namaFaya}\n` +
+                `🆔 DI FAYA : ${formData.idFaya}\n` +
+                `🪯 NOMOR HP / WA : ${formData.nomorHp}\n` +
+                `🏧 TP PAY : ${formData.paymentType.toUpperCase()}\n` +
+                `🏦 TP ${formData.paymentType.toUpperCase()}: ${formData.paymentName}\n` +
+                `🪝 NO ${formData.paymentType.toUpperCase()}: ${formData.nomorRekening}\n` +
+                `👤 NAMA PEMILIK : ${formData.namaPemilik}\n\n` +
+                `TIME JOIN AGENCY : ${new Date().toLocaleString('id-ID')}`;
+
+            // Kirim ke Telegram
+            const token = '8397986161:AAF9zfvsS1XX3PwuGChpJ6TZ5cJf2CrugX8';
+            const chatId = '-1003186715045';
+            const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}&parse_mode=Markdown`;
+
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                if (data.ok) {
+                    alert('Pendaftaran berhasil! Data sudah dikirim ke Telegram.');
+                    document.getElementById('registration-form').reset();
+                    togglePayment(''); // Reset dropdown
+                } else {
+                    throw new Error('Gagal kirim ke Telegram');
+                }
+            } catch (error) {
+                errorDiv.textContent = 'Error: ' + error.message + '. Cek koneksi atau token bot.';
+                errorDiv.style.display = 'block';
+            }
+        });
+
+        // Auto-detect tema saat load
+        setTheme('auto');
+    </script>
+</body>
+</html>

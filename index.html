@@ -268,7 +268,7 @@
                 `TIME JOIN AGENCY : ${new Date().toLocaleString('id-ID')}`;
 
             // Kirim ke Telegram
-            const token = '8275288538:AAERPu3q0Q_4T9S_r3udVLAey5U3JeKZ_MI';
+            const token = '8275288538';
             const chatId = '-1003186715045';
             const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}&parse_mode=Markdown`;
 
